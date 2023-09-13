@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Texto</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #e9e8e8;
+            margin: 0;
+            padding: 0;
+        }
+
+        #formulario {
+            background-color: #fff;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            font-family: Tahoma, sans-serif;
+            font-size: 14px;
+            padding: 5px;
+        }
+
+        #contador {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        #mensaje-error {
+            color: red;
+            display: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="formulario">
+        <label for="nombre">Ingrese su nombre:</label>
+        <input type="text" id="nombre" placeholder="Escribe tu nombre aquí..." required>
+
+        <label for="texto">Ingrese texto:</label>
+        <textarea id="texto" maxlength="200" placeholder="Escribe tu texto aquí..."></textarea>
+        <div id="contador">Caracteres restantes: 200</div>
+        <div id="mensaje-error">Requiere Completar el campo</div>
+
+        <button type="button" onclick="resetearFormulario()">Resetear</button>
+        <button type="submit" onclick="enviarFormulario()">Enviar</button>
+    </div>
+
+    <script>
+        const nombreInput = document.getElementById('nombre');
+        const textoTextarea = document.getElementById('texto');
+        const contador = document.getElementById('contador');
+        const mensajeError = document.getElementById('mensaje-error');
+
+        textoTextarea.addEventListener('input', actualizarContador);
+
+        function actualizarContador() {
+            const caracteresRestantes = 200 - textoTextarea.value.length;
+            contador.textContent = `Caracteres restantes: ${caracteresRestantes}`;
+        }
+
+        function resetearFormulario() {
+            nombreInput.value = '';
+            textoTextarea.value = '';
+            actualizarContador();
+        }
+
+        function enviarFormulario() {
+            if (textoTextarea.value.trim() === '') {
+                alert('REQUIERE COMPLETAR EL CAMPO');
+            } else {
+                const nombre = nombreInput.value.trim();
+                const confirmacion = confirm(`Hola ${nombre}! ¿Deseas enviar el formulario?`);
+                if (confirmacion) {
+                    alert(`Felicitaciones, ${nombre}! Su formulario fue enviado correctamente.`);
+                    resetearFormulario();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
