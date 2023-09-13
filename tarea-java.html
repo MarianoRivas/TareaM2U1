@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Color de Fondo</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+        }
+
+        .cuadrado {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+            line-height: 100px;
+            font-size: 18px;
+            border: 2px solid #000;
+        }
+
+        /* Colores de los cuadrados en tonos pastel */
+        .rosa { background-color: #db9aa5; color: #141313; }
+        .verde { background-color: #a0d3a0; color: #000; }
+        .azul { background-color: #ADD8E6; color: #000; }
+    </style>
+</head>
+<body>
+    <div class="cuadrado rosa" onclick="cambiarColor('#db9aa5')">Rosa</div>
+    <div class="cuadrado verde" onclick="cambiarColor('#a0d3a0')">Verde</div>
+    <div class="cuadrado azul" onclick="cambiarColor('#ADD8E6')">Azul</div>
+
+    <button onclick="resetearColor()">Reset</button>
+
+    <script>
+        let colorOriginal = document.body.style.backgroundColor;
+
+        function cambiarColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+
+        function resetearColor() {
+            document.body.style.backgroundColor = colorOriginal;
+        }
+    </script>
+</body>
+</html>
